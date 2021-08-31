@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       
-     <Palette {...seedColors[3]} />
+     <Palette {...seedColors[1]} />
 
     </div>
   );
