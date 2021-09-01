@@ -1,10 +1,25 @@
-.Palette {
-    height: 100vh;
+.Navbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 6vh;
 }
 
-.Palette-colors {
-    height: 90%;
-    margin-top: 3px;
+.logo {
+    margin-right: 15px;
+    padding: 0 13px;
+    font-size: 22px;
+    background-color: #eceff1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-family: Roboto;
+    font-weight: 500;
+}
+
+.logo a {
+    text-decoration: none;
+    color: black;
 }
 
 .slider {
