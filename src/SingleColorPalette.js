@@ -42,7 +42,7 @@ class SingleColorPalette extends Component {
           key={color.name}
           background={color[format]}
           name={color.name}
-          showLink= {false}
+          showingFullPalette={false}
           />
         ))
         return (
