@@ -44,7 +44,9 @@ class Palette extends Component {
             <div className="Palette">
                 <Navbar level={this.state.level} 
                 levelChange={this.levelChange}
-                handleChange={this.changeFormat} />
+                handleChange={this.changeFormat} 
+                showingAllColors
+                />
                 <div className="Palette-colors">
                     {colorBoxes}
                 </div>
