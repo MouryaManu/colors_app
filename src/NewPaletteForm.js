@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import clsx from 'clsx';
+import {withStyles} from "@material-ui/styles";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -76,20 +77,36 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function NewPaletteForm() {
-    const classes = useStyles();
-    const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
-    
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-    
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
-    
-    return (
-     <div className={classes.root}>
+     
+       
+   
+        const classes = useStyles();
+        const theme = useTheme();
+        const [open, setOpen] = React.useState(true);
+        const [currColor, setCurrColor]= React.useState('black');
+        const [colors,setColors]= React.useState(['purple','green','#cde125'])
+        
+        
+        const handleDrawerOpen = () => {
+            setOpen(true);
+        };
+        
+        const handleDrawerClose = () => {
+            setOpen(false);
+        };
+
+
+        const updateCurrentColor=(newColor) =>{
+            setCurrColor(newColor.hex);
+        }
+
+        const addNewColor=()=> {
+            setColors([...colors,currColor])
+        } 
+
+   
+       return (
+         <div className={classes.root}>
         <CssBaseline />
         <AppBar
         position="fixed"
@@ -129,11 +146,11 @@ export default function NewPaletteForm() {
         <Divider />
         <Typography variant="h4">Design your Palette</Typography>
         <div>
-        <Button variant='contained' color='secondary'>Random Color</Button>
+        <Button variant='contained' color='secondary' >Random Color</Button>
         <Button variant='contained' color='primary'>Clear Palette</Button>
         </div>
-        <ChromePicker color='purple' onChangeComplete={(newColor)=> console.log(newColor)} />
-        <Button variant='contained' color='primary'>Add Color</Button>
+        <ChromePicker color={currColor} onChangeComplete={updateCurrentColor} />
+        <Button style={{backgroundColor: currColor}} variant='contained' color='primary' onClick={addNewColor}>Add Color</Button>
         
         </Drawer>
         <main
@@ -142,10 +159,15 @@ export default function NewPaletteForm() {
         })}
         >
         <div className={classes.drawerHeader} />
-         
+         {colors.map(color =>(
+             <ul>
+                <li style={{backgroundColor: color}}>{color}</li>
+             </ul>
+            
+         ))}
         </main>
         </div>
         );
-    }
-    
-    //export default withStyles(styles,{withTheme: true})(NewPaletteForm);
+}
+
+//export default withStyles(useStyles,{withTheme: true})(NewPaletteForm);
