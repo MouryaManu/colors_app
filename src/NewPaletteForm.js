@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function NewPaletteForm() {
+export default function NewPaletteForm(props) {
      
        
    
@@ -117,6 +117,20 @@ export default function NewPaletteForm() {
         const handleChange=(evt) => {
             setnewName(evt.target.value); 
         }
+
+        const handleSubmit=()=> {
+            let newName= "New Test Palatte"
+            const newPalette ={
+                paletteName: newName,
+                id: newName.toLowerCase().replace(/ /g,'-'),
+                colors: colors
+            }
+            props.savePalette(newPalette);
+            props.history.push('/');
+        }
+
+
+
         useEffect(()=> {
            
            ValidatorForm.addValidationRule('isColorUnique', (value) => {
@@ -144,6 +158,7 @@ export default function NewPaletteForm() {
         className={clsx(classes.appBar, {
             [classes.appBarShift]: open,
         })}
+        color='default'
         >
         <Toolbar>
         <IconButton
@@ -158,6 +173,7 @@ export default function NewPaletteForm() {
         <Typography variant="h6" noWrap>
         Persistent drawer
         </Typography>
+        <Button variant='contained' color='primary' onClick={handleSubmit} >Save Palette</Button>
         </Toolbar>
         </AppBar>
         <Drawer
