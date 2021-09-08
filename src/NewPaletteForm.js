@@ -3,7 +3,7 @@ import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
 import { withStyles } from '@material-ui/styles';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -13,67 +13,9 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { Button } from '@material-ui/core';
 import DraggableColorList from './DraggableColorList';
 import {arrayMove} from 'react-sortable-hoc';
+import useStyles from './styles/NewPaletteFormStyles';
 
 
-
-const drawerWidth = 400;
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-    },
-    hide: {
-        display: 'none',
-    },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0,
-    },
-    drawerPaper: {
-        width: drawerWidth,
-        display:'flex',
-        alignItems:'center'
-    },
-    drawerHeader: {
-        display: 'flex',
-        alignItems: 'center',
-        padding: theme.spacing(0, 1),
-        // necessary for content to be below app bar
-        ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
-    },
-    content: {
-        flexGrow: 1,
-       height: "calc(100vh - 64px)",
-        padding: theme.spacing(3),
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        marginLeft: -drawerWidth,
-    },
-    contentShift: {
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-        marginLeft: 0,
-    },
-    container: {
-        width: "90%",
-        height: "100%",
-        display:'flex',
-        flexDirection: 'column',
-        justifyContent:'center',
-        alignItems: 'center'
-    },
-    buttons: {
-        width: '100%'
-    },
-    button: {
-        width:'50%'
-    }
-}));
 
 
 export default function NewPaletteForm(props,{maxColors=20} ) {
@@ -83,11 +25,8 @@ export default function NewPaletteForm(props,{maxColors=20} ) {
         const classes = useStyles();
         const theme = useTheme();
         const [open, setOpen] = React.useState(true);
-        const [currColor, setCurrColor]= React.useState('teal');
         const [colors,setColors]= React.useState(props.palettes[0].colors);
         const[newColorName, setnewColorName]= React.useState('')
-       // const [newPaletteName, setNewPaletteName]= React.useState('')
-
         const isPaletteFull= colors.length >= maxColors;
         
         const handleDrawerOpen = () => {
@@ -100,18 +39,14 @@ export default function NewPaletteForm(props,{maxColors=20} ) {
         };
 
 
-        // const updateCurrentColor=(newColor) =>{
-        //     setCurrColor(newColor.hex);
-        // }
+      
 
         const addNewColor=(newColor)=> {
             setColors([...colors, newColor])
             setnewColorName('');
         } 
 
-        // const handleChange=(evt) => {
-        //     setnewColorName(evt.target.value); 
-        // }
+       
 
         const handleSubmit=(newPalette)=> {
             newPalette.id= newPalette.paletteName.toLowerCase().replace(/ /g,'-')
