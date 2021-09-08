@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import ColorBox from './ColorBox';
 import styles from './styles/PaleteStyles'
 import {withStyles} from "@material-ui/styles";
-import './ColorBox.css'
 
 
 
@@ -59,8 +58,8 @@ class SingleColorPalette extends Component {
                 />
                 <div className={classes.PaletteColors} >
                     {colorBoxes}
-                    <div className="ColorBox go-back">
-                        <Link to={`/palette/${id}`} className='back-button'>Go Back!!</Link>
+                    <div className={classes.goBack}>
+                        <Link to={`/palette/${id}`}>Go Back!!</Link>
                     </div>
                 </div>
                 <PaletteFooter paletteName={paletteName} emoji={emoji}  />    
