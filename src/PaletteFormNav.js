@@ -23,7 +23,9 @@ const styles= theme=> ({
             duration: theme.transitions.duration.leavingScreen,
         }),
         flexDirection: "row",
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        height: '64px'
     },
     appBarShift: {
         width: `calc(100% - ${drawerWidth}px)`,
@@ -36,6 +38,15 @@ const styles= theme=> ({
     menuButton: {
         marginRight: theme.spacing(2),
     },
+    navBtns: {
+        marginRight: '1rem',
+    },
+    button: {
+        margin: '0 0.5rem',
+    },
+    link : {
+        textDecoration: 'none'
+    }
     
 })
 
@@ -44,10 +55,15 @@ class PaletteFormNav extends Component {
         super(props);
         this.state={
           open: true,
-          colors: []
-        };
-        
+          formShowing: false
+        }; 
+     this.showForm=this.showForm.bind(this);
+    }
 
+    showForm() {
+        this.setState ({
+             formShowing: true
+        })
     }
    
 
@@ -79,12 +95,18 @@ class PaletteFormNav extends Component {
         </Typography>
         </Toolbar>
         <div className="navBtns">
-        <PaletteMetaForm palettes={this.props.palettes} handleSubmit={this.props.handleSubmit}  />
-        <Link to='/'>
-           <Button variant='contained' color='secondary'>Go Back!</Button>
+        <Link className={classes.link} to='/'>
+           <Button className={classes.button} variant='contained' color='secondary'>Go Back!</Button>
         </Link>
+        <Button className={classes.button} variant="contained" color="primary" onClick={this.showForm}>
+          Save
+        </Button>
         </div>
         </AppBar>
+
+       {this.state.formShowing && (
+       <PaletteMetaForm palettes={this.props.palettes} handleSubmit={this.props.handleSubmit} />
+       )}
         </div>
         )
     }
