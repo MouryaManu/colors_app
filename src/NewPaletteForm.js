@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
-import { withStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
